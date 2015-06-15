@@ -4,7 +4,7 @@ var API_WEATHER_ICON = 'http://openweathermap.org/img/w/';
 var API_WEATHER_KEY = "b1e223d6c0066382a251261dafbf98e8";
 var API_WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?APPID=" + API_WEATHER_KEY + "&";
 
-var cities = [];
+
 var cityWeather = {};
 cityWeather.zone;
 cityWeather.icon;
@@ -124,7 +124,7 @@ function currentDate()
 	var dayTime2 = date.toLocaleTimeString().split(' ')[1].split('.')[1];
 	var fullHour = hour+':'+minute+' '+dayTime1+dayTime2;
 	//day
-	var day = date.getUTCDay()
+	var day = date.getDay()
 	var today;
 	var days = {};
 	days.lun = 1;
@@ -133,7 +133,7 @@ function currentDate()
 	days.jue = 4;
 	days.vie = 5;
 	days.sab = 6;
-	days.dom = 7;
+	days.dom = 0;
 
 
 	if(day === days.lun){
@@ -190,26 +190,11 @@ function getApiNewCity(data)
 	var curretnPosition = true;
 	renderTemplate(timeWorld, curretnPosition);
 
-	//guardadr busquedas
-	cities.push(cityWeather);
-	localStorage.setItem('cities', JSON.stringify(cities));
-
+	
 
 
 	});
 }
 
-function loadCities()
-{
-	function CargarCities(cities)
-	{
-		cities.forEach(function(city)
-		{
-			renderTemplate(city);
-		});
-	}
 
-	var cities = JSON.parse(localStorage.getItem('cities'));
-	CargarCities(cities);
-}
 
